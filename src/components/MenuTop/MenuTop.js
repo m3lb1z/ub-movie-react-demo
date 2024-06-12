@@ -13,7 +13,7 @@ const MenuTop = () => {
   const items = [
     {
       label: "Home",
-      key: "/home",
+      key: "/",
     },
     {
       label: "Ultimos lanzamientos",
@@ -38,7 +38,7 @@ const MenuTop = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["/home"]}
+          defaultSelectedKeys={["/"]}
           onClick={navigateLink}
           style={{ lineHeight: "64px" }}
           items={items}
