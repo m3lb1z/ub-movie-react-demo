@@ -3,6 +3,7 @@ import SliderMovies from "../components/SliderMovies";
 import useFetch from "../hooks/useFetch";
 import { URL_API, API } from "../utils/constants";
 import MovieList from "../components/MovieList";
+import Footer from "../components/Footer";
 
 export default function Home() {
   // const newMovies = useFetch(
@@ -36,6 +37,7 @@ export default function Home() {
           />
         </Col>
       </Row>
+      <Footer />
     </>
   );
 }
