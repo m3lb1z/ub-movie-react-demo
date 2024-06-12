@@ -1,8 +1,15 @@
+import { Button, ConfigProvider, DatePicker, Space } from "antd";
+
 function App() {
   return (
-    <div className="App">
+    <ConfigProvider theme={{ token: { colorPrimary: "#66b3fb" } }}>
       <h1>Estamos en App.</h1>
-    </div>
+      <Space>
+        <DatePicker />
+        <Button type="primary">Primary Button</Button>
+        <Button>Default Button</Button>
+      </Space>
+    </ConfigProvider>
   );
 }
 
