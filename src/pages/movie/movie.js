@@ -1,9 +1,12 @@
 import useFetch from "../../hooks/useFetch";
 import { API, URL_API } from "../../utils/constants";
 import { Button, Col, Row } from "antd";
+import { PlayCircleOutlined } from "@ant-design/icons";
 import { useParams } from "react-router-dom";
 import moment from "moment";
 import "./movie.scss";
+import ModalVideo from "../../components/ModalVideo/ModalVideo";
+import { useState } from "react";
 
 export default function Movie() {
   const { id: movieId } = useParams();
@@ -48,6 +51,33 @@ function PosterMovie({ image }) {
 }
 
 function MovieInfo({ movie: { id, title, overview, release_date, genres } }) {
+  const [isVisibleModal, setIsVisibleModal] = useState(false);
+  const videoMovie = useFetch(
+    `${URL_API}/movie/${id}/videos?api_key=${API}&language=es-ES`
+  );
+
+  const openModal = () => setIsVisibleModal(true);
+  const closeModal = () => setIsVisibleModal(false);
+
+  const renderVideo = () => {
+    if (videoMovie.result) {
+      if (videoMovie.result.results.length > 0) {
+        return (
+          <>
+            <Button icon={<PlayCircleOutlined />} onClick={openModal}>
+              Ver Trailer
+            </Button>
+            <ModalVideo
+              videoKey={videoMovie.result.results[0].key}
+              videoPlatform={videoMovie.result.results[0].site}
+              isOpen={isVisibleModal}
+              close={closeModal}
+            />
+          </>
+        );
+      }
+    }
+  };
   return (
     <>
       <div className="movie__info-header">
@@ -55,7 +85,7 @@ function MovieInfo({ movie: { id, title, overview, release_date, genres } }) {
           {title}{" "}
           <span>{moment(release_date, "YYYY-MM-DD").format("YYYY")}</span>
         </h1>
-        <button>ver trailer</button>
+        {renderVideo()}
       </div>
       <div className="movie__info-content">
         <h3>General</h3>
