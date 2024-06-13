@@ -1,10 +1,12 @@
 import "./MenuTop.scss";
 import { ReactComponent as Logo } from "../../assets/img/logo.svg";
 import { Menu } from "antd";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const MenuTop = () => {
   const navegacion = useNavigate();
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const navigateLink = (e) => {
     navegacion(e.key);
@@ -38,7 +40,7 @@ const MenuTop = () => {
         <Menu
           theme="dark"
           mode="horizontal"
-          defaultSelectedKeys={["/"]}
+          defaultSelectedKeys={[currentPath]}
           onClick={navigateLink}
           style={{ lineHeight: "64px" }}
           items={items}
