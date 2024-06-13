@@ -15,7 +15,7 @@ export default function App() {
     <ConfigProvider theme={{ token: { colorPrimary: "#66b3fb" } }}>
       <Layout>
         <BrowserRouter>
-          <Header>
+          <Header style={{ zIndex: 1 }}>
             <MenuTop />
           </Header>
           <Content>
